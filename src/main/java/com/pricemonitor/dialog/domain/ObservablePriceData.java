@@ -50,10 +50,10 @@ public class ObservablePriceData {
         historicalPricesMap.putIfAbsent(key, createEmptyObservablePriceList());
         ObservableList<Price> prices = historicalPricesMap.get(key);
         
-        
+        prices.add(price);
         //add price in order in case some price with previous timestamp appears later
         //it's also faster than Collectins.sort
-        addInOrder(prices, price, sortByTimestampDesc);
+        //addInOrder(prices, price, sortByTimestampDesc);
             
         //remove tail of items past limit
         if (prices.size()>historicalPricesLimit) {
