@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -16,9 +17,12 @@ import javafx.util.Callback;
 import com.pricemonitor.dialog.domain.Price;
 
 public class PricesTableUtils {
+	
+	static final public int SORT_MODE_NONE	= 0;
+	static final public int SORT_MODE_INSTRUMENT_SOURCE	= 1;
 
     @SuppressWarnings("unchecked")
-    static public TableView<Price> createPricesTableView(ObservableList<Price> pricesList) {
+    static public TableView<Price> createPricesTableView(ObservableList<Price> pricesList, int initialSortMode) {
         if (pricesList == null)
             throw new IllegalArgumentException("pricesList is null");
 
@@ -41,7 +45,7 @@ public class PricesTableUtils {
         offerColumn.setCellValueFactory(new PropertyValueFactory<Price, BigDecimal>("offer"));
 
         TableColumn<Price, String> timestampColumn = new TableColumn<Price, String>("Timestamp");
-        timestampColumn.setMinWidth(150);
+        timestampColumn.setMinWidth(200);
         //format timedate cell
         timestampColumn.setCellValueFactory(new Callback<CellDataFeatures<Price, String>, ObservableValue<String>>() {
             @Override
@@ -61,7 +65,11 @@ public class PricesTableUtils {
         table.getColumns().addAll(instrumentColumn, sourceColumn, askColumn, offerColumn, timestampColumn);
         
         //default sorting
-        table.getSortOrder().setAll(instrumentColumn, sourceColumn);
+        switch (initialSortMode) {
+	        case SORT_MODE_INSTRUMENT_SOURCE:
+		        table.getSortOrder().setAll(instrumentColumn, sourceColumn);
+		        break;
+        }
         
         return table;
     }

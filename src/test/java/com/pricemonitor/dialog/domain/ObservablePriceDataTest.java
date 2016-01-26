@@ -36,7 +36,7 @@ public class ObservablePriceDataTest {
         priceData.addPrice(priceA);
         
         assertEquals("Should return price", Arrays.asList(priceA), priceData.getObservableLatestPrices());
-    }
+     }
     
     @Test
     public void testGetObservableLatestPricesMulti() {
@@ -52,26 +52,11 @@ public class ObservablePriceDataTest {
         priceData.addPrice(priceB);
         priceData.addPrice(priceC);
         
-        assertEquals("Should return only latests prices", Arrays.asList(priceA2,priceB,priceC), priceData.getObservableLatestPrices());
+        assertEquals("Should return only latest prices", Arrays.asList(priceA2,priceB,priceC), priceData.getObservableLatestPrices());
     }
     
     @Test
     public void testGetObservableHistoricalPrices() {
-        ObservablePriceData priceData   = new ObservablePriceData(50);
-        
-        Price priceA1    = createDummyPrice("a");
-        Price priceA2    = createDummyPrice("a");
-        Price priceA3    = createDummyPrice("a");
-        
-        priceData.addPrice(priceA1);
-        priceData.addPrice(priceA2);
-        priceData.addPrice(priceA3);
-        
-        assertEquals("Should return historical prices", Arrays.asList(priceA3,priceA2,priceA1), priceData.getObservableHistoricalPrices(new InstrumentSourceKey(priceA1)));
-    }
-    
-    @Test
-    public void testGetObservableHistoricalPricesMixed() {
         ObservablePriceData priceData   = new ObservablePriceData(50);
         
         Price priceA1    = createDummyPrice("a");

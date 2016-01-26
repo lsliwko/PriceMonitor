@@ -19,7 +19,7 @@ public class PriceMonitorDialog extends Scene {
         
         if (priceData==null) throw new IllegalArgumentException("priceData is null");
 
-        final TableView<Price> table = PricesTableUtils.createPricesTableView(priceData.getObservableLatestPrices());
+        final TableView<Price> table = PricesTableUtils.createPricesTableView(priceData.getObservableLatestPrices(), PricesTableUtils.SORT_MODE_INSTRUMENT_SOURCE);
         
         // set click listener
         table.setOnMousePressed(new EventHandler<MouseEvent>() {

@@ -24,7 +24,7 @@ public class PriceHistoryDialog extends Scene {
         if (key==null) throw new IllegalArgumentException("key is null");
         if (priceData==null) throw new IllegalArgumentException("priceData is null");
 
-        TableView<Price> table = PricesTableUtils.createPricesTableView(priceData.getObservableHistoricalPrices(key));
+        TableView<Price> table = PricesTableUtils.createPricesTableView(priceData.getObservableHistoricalPrices(key), PricesTableUtils.SORT_MODE_NONE);
          
         ((StackPane) getRoot()).getChildren().add(table);
     }

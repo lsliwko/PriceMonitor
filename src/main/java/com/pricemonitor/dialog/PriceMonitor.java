@@ -51,17 +51,18 @@ public class PriceMonitor extends Application {
         		EventBus.register(new PriceEventHandler(source, instrument, priceData));
         	}
         }
-          
-        initFeedThreads();
+        
+        //create 5 random threads (outside EDT) that feed data
+        initFeedThreads(5);
         
         primaryStage.setTitle("Price monitor");
         primaryStage.setScene(new PriceMonitorDialog(priceData));
         primaryStage.show();
     }
 
-    private void initFeedThreads() {
+    private void initFeedThreads(int numberOfThreads) {
         //start five thread that will generate random price change events
-        for (int i=0;i<5;i++) {
+        for (int i=0;i<numberOfThreads;i++) {
 	        Thread feedThread = new Thread() {
 	        	private Random random	= new Random();
 	        	
